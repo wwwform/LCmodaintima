@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sua Loja de Pedidos</title>
+    <style>
+        body {
+            background-image: url('caminho-para-sua-imagem-de-fundo.jpg');
+            background-size: cover;
+        }
+        .item {
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 200px;
+        }
+        .item img {
+            width: 100%;
+        }
+        .carrinho {
+            border: 1px solid #ddd;
+            margin-top: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="itens">
+    <!-- Exemplo de item -->
+    <div class="item" data-preco="10">
+        <img src="caminho-para-imagem-do-item.jpg" alt="Nome do Item">
+        <h4>Nome do Item</h4>
+        <p>R$10,00</p>
+        <input type="number" value="1" min="1">
+        <button onclick="adicionarAoCarrinho(this)">Adicionar ao Carrinho</button>
+    </div>
+    <!-- Repita o bloco acima para cada item que desejar adicionar -->
+</div>
+
+<div class="carrinho">
+    <h3>Carrinho</h3>
+    <ul id="lista-carrinho">
+        <!-- Os itens do carrinho aparecerão aqui -->
+    </ul>
+    <p>Total: R$<span id="total-carrinho">0</span></p>
+</div>
+
+<form id="formulario-pedido" onsubmit="enviarPedido(event)">
+    <input type="text" id="nome" placeholder="Seu nome" required>
+    <input type="tel" id="telefone" placeholder="Seu telefone" required>
+    <button type="submit">Enviar Pedido</button>
+</form>
+
+<script>
+var carrinho = [];
+
+function adicionarAoCarrinho(botao) {
+    var item = botao.closest('.item');
+    var nome = item.querySelector('h4').innerText;
+    var preco = item.getAttribute('data-preco');
+    var quantidade = item.querySelector('input[type=number]').value;
+    carrinho.push({ nome: nome, preco: preco, quantidade: quantidade });
+    atualizarCarrinho();
+}
+
+function atualizarCarrinho() {
+    var lista = document.getElementById('lista-carrinho');
+    var total = 0;
+    lista.innerHTML = '';
+    carrinho.forEach(function(item, index) {
+        var valorItem = item.preco * item.quantidade;
+        total += valorItem;
+        lista.innerHTML += '<li>' + item.nome + ' x ' + item.quantidade + ' - R$' + valorItem.toFixed(2) + '</li>';
+    });
+    document.getElementById('total-carrinho').innerText = total.toFixed(2);
+}
+
+function enviarPedido(event) {
+    event.preventDefault();
+    var nome = document.getElementById('nome').value;
+    var telefone = document.getElementById('telefone').value;
+    var mensagem = 'Pedido de ' + nome + ':\n';
+    carrinho.forEach(function(item) {
+        mensagem += item.nome + ' x ' + item.quantidade + ' - R$' + (item.preco * item.quantidade).toFixed(2) + '\n';
+    });
+    mensagem += 'Total: R$' + document.getElementById('total-carrinho').innerText;
+    var whatsappUrl = 'https://api.whatsapp.com/send?phone=' + encodeURIComponent(telefone) + '&text=' + encodeURIComponent(mensagem);
+    window.open(whatsappUrl, '_blank');
+}
+</script>
+
+</body>
+</html>
