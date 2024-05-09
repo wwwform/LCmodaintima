@@ -8,12 +8,14 @@
         body {
             background-image: url('caminho-para-sua-imagem-de-fundo.jpg');
             background-size: cover;
+            color: white; /* Cor do texto alterada para branco */
         }
         .item {
             border: 1px solid #ddd;
             margin-bottom: 10px;
             padding: 10px;
             width: 200px;
+            background-color: rgba(0, 0, 0, 0.5); /* Fundo do item com transparência */
         }
         .item img {
             width: 100%;
@@ -22,6 +24,37 @@
             border: 1px solid #ddd;
             margin-top: 10px;
             padding: 10px;
+            background-color: rgba(255, 255, 255, 0.5); /* Fundo do carrinho com transparência */
+        }
+        /* Estilo para o formulário */
+        #formulario-pedido {
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.5); /* Fundo do formulário com transparência */
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 300px;
+        }
+        #formulario-pedido input[type="text"],
+        #formulario-pedido input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        #formulario-pedido button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ffd700; /* Cor de fundo amarela */
+            color: black; /* Cor do texto preto */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #formulario-pedido button[type="submit"]:hover {
+            background-color: #f3c500; /* Cor de fundo amarela mais clara */
         }
     </style>
 </head>
