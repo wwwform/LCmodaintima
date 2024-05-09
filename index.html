@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sua Loja de Pedidos</title>
+    <title>Bem-vindo à Sua Loja de Pedidos</title>
     <style>
+        /* Estilos CSS aqui */
         body {
             background-image: url('caminho-para-sua-imagem-de-fundo.jpg');
             background-size: cover;
-            color: white; /* Cor do texto alterada para branco */
+            color: pink; /* Cor do texto alterada para branco */
         }
         .item {
             border: 1px solid #ddd;
@@ -60,6 +61,8 @@
 </head>
 <body>
 
+<h1>Bem-vindo à Sua Loja de Pedidos</h1> <!-- Título personalizado -->
+
 <div id="itens">
     <!-- Exemplo de item -->
     <div class="item" data-preco="10">
@@ -88,6 +91,7 @@
 
 <script>
 var carrinho = [];
+var numeroWhatsApp = 'seu-numero-de-whatsapp'; // Insira seu número de WhatsApp aqui
 
 function adicionarAoCarrinho(botao) {
     var item = botao.closest('.item');
@@ -119,7 +123,7 @@ function enviarPedido(event) {
         mensagem += item.nome + ' x ' + item.quantidade + ' - R$' + (item.preco * item.quantidade).toFixed(2) + '\n';
     });
     mensagem += 'Total: R$' + document.getElementById('total-carrinho').innerText;
-    var whatsappUrl = 'https://api.whatsapp.com/send?phone=' + encodeURIComponent(telefone) + '&text=' + encodeURIComponent(mensagem);
+    var whatsappUrl = 'https://api.whatsapp.com/send?phone=' + encodeURIComponent(numeroWhatsApp) + '&text=' + encodeURIComponent(mensagem);
     window.open(whatsappUrl, '_blank');
 }
 </script>
